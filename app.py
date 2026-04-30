@@ -89,7 +89,10 @@ def get_all_images():
 def load_admin_labels():
     """Load existing admin labels or create empty DataFrame"""
     if os.path.exists(ADMIN_LABELS_FILE):
-        return pd.read_csv(ADMIN_LABELS_FILE)
+        df = pd.read_csv(ADMIN_LABELS_FILE)
+        # Fill NaN (empty cells) with empty string
+        df["label"] = df["label"].fillna("")
+        return df
     else:
         images = get_all_images()
         return pd.DataFrame({"image": images, "label": ""})

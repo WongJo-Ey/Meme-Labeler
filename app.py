@@ -127,6 +127,15 @@ st.title("🚀 Fast Hate Speech Labeling")
 mode = st.radio("Choose mode:", ["👑 Admin (You)", "👥 Friend"])
 
 if mode == "👑 Admin (You)":
+    import os
+    if os.path.exists("admin_labels.csv"):
+        with open("admin_labels.csv", "r") as f:
+            st.download_button(
+                label="💾 EMERGENCY: Download Admin Labels NOW",
+                data=f.read(),
+                file_name="admin_labels.csv",
+                mime="text/csv"
+            )
     st.subheader("Admin Mode – Pre‑label all images")
     st.info("✅ Default is **Non‑Hate Speech**. Click 'Hate Speech' or 'Controversial' if needed. Progress auto‑saves.")
     
